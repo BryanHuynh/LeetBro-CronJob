@@ -41,7 +41,7 @@ findNewAcs().then(
 	(new_users_acs) => {
 		if (!new_users_acs || Object.keys(new_users_acs).length == 0) return;
 		console.log(new_users_acs);
-		fetch(`${process.env.LEETBRO_HOSTNAME}:${process.env.LEETBRO_PORT}/api`, {
+		fetch(`${process.env.LEETBRO_HOSTNAME}/api`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
