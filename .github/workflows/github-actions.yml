@@ -22,7 +22,7 @@ jobs:
         run: npm install
 
       - name: Run app
-        run: npm start
+        run: npx ts-node ./src/index.ts
         env:
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
