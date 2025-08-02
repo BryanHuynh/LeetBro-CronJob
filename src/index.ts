@@ -7,7 +7,9 @@ import dotenv from "dotenv";
 import { AcCompletionRepository } from "./repositories/ac-completion-repository";
 
 dotenv.config();
-
+if(!process.env.LEETBRO_HOSTNAME) {
+	console.log('UNABLE TO GET SECRETS!')
+}
 const findNewAcs = async (): Promise<UserProblems | null> => {
 	const leetcodeAccountRepo = container.resolve(LeetCodeAccountRepository);
 	const leetcode_accounts = await leetcodeAccountRepo.getAllAccounts();
