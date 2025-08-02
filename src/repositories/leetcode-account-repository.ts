@@ -10,6 +10,7 @@ export class LeetCodeAccountRepository {
 	async getAllAccounts(): Promise<LeetcodeAccount[]> {
 		try {
 			const res = await this.dbService.execute("select id, created_at from leetcode_account");
+			console.log(res);
 			if (res.rows.length > 0) return res.rows;
 		} catch (err) {}
 
