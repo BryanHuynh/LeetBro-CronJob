@@ -16,6 +16,7 @@ jobs:
         POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
         POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
         LEETBRO_HOSTNAME: ${{ secrets.LEETBRO_HOSTNAME }}
+        LEETBRO_PORT: ${{ secrets.LEETBRO_PORT }}
         BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
     steps:
       - name: Checkout repository
