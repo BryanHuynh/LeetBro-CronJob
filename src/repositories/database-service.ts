@@ -40,6 +40,10 @@ export class DatabaseService {
 
 	async execute(query: string, params?: any[]): Promise<QueryResult<any>> {
 		// An async function automatically handles promise resolution and rejection.
-		return this.pool.query(query, params);
+		if(!this.pool) {
+			this.pool = new Pool(this.pgConfig);
+			this.init();
+		}
+		return await this.pool.query(query, params);
 	}
 }
