@@ -8,6 +8,15 @@ export class DatabaseService {
 	private pool: Pool;
 
 	constructor() {
+		if (
+			!process.env.POSTGRES_USER ||
+			!process.env.POSTGRES_HOST ||
+			!process.env.POSTGRES_DATABASE ||
+			!process.env.POSTGRES_PASSWORD ||
+			!process.env.POSTGRES_PORT
+		) {
+			throw new Error("UNABLE TO GET SECRETS!");
+		}
 		this.pgConfig = {
 			user: process.env.POSTGRES_USER,
 			host: process.env.POSTGRES_HOST,
@@ -26,7 +35,7 @@ export class DatabaseService {
 			await this.pool.end();
 			process.exit();
 		});
-		this.testConnection().then(console.log)
+		this.testConnection().then(console.log);
 	}
 
 	async testConnection() {
