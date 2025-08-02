@@ -8,6 +8,7 @@ on:
 jobs:
   run-cron-job:
     runs-on: ubuntu-latest
+    environment: development
     env:
         POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
         POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
