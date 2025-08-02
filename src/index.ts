@@ -7,10 +7,11 @@ import dotenv from "dotenv";
 import { AcCompletionRepository } from "./repositories/ac-completion-repository";
 
 dotenv.config();
-if(!process.env.LEETBRO_HOSTNAME) {
-	console.log('UNABLE TO GET SECRETS!')
+if (!process.env.LEETBRO_HOSTNAME) {
+	console.log("UNABLE TO GET SECRETS!");
 }
 const findNewAcs = async (): Promise<UserProblems | null> => {
+	console.log("finding new acs");
 	const leetcodeAccountRepo = container.resolve(LeetCodeAccountRepository);
 	const leetcode_accounts = await leetcodeAccountRepo.getAllAccounts();
 	const leetcode_ids = leetcode_accounts
@@ -36,9 +37,10 @@ const findNewAcs = async (): Promise<UserProblems | null> => {
 			new_users_acs[user] = new_user_acs;
 		}
 	}
+	console.log("found new acs");
 	return new_users_acs;
 };
-console.log('STARTING JOB')
+console.log("STARTING JOB");
 findNewAcs().then(
 	(new_users_acs) => {
 		if (!new_users_acs || Object.keys(new_users_acs).length == 0) return;
@@ -47,7 +49,7 @@ findNewAcs().then(
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": `Bearer ${process.env.BEARER_TOKEN}`
+				Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
 			},
 			body: JSON.stringify(new_users_acs),
 		}).then((res) => {
@@ -58,4 +60,4 @@ findNewAcs().then(
 		console.log(err);
 	}
 );
-console.log('JOB ENDED')
+console.log("JOB ENDED");
