@@ -36,7 +36,7 @@ const findNewAcs = async (): Promise<UserProblems | null> => {
 	}
 	return new_users_acs;
 };
-
+console.log('STARTING JOB')
 findNewAcs().then(
 	(new_users_acs) => {
 		if (!new_users_acs || Object.keys(new_users_acs).length == 0) return;
@@ -56,5 +56,6 @@ findNewAcs().then(
 		console.log(err);
 	}
 );
+console.log('JOB ENDED')
 
 process.exit(0)
