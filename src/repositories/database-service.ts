@@ -31,7 +31,7 @@ export class DatabaseService {
 
 	async testConnection() {
 		try {
-			this.pool.query("SELECT 1");
+			await this.pool.query("SELECT 1");
 			return true;
 		} catch (err) {
 			return false;
@@ -40,10 +40,6 @@ export class DatabaseService {
 
 	async execute(query: string, params?: any[]): Promise<QueryResult<any>> {
 		// An async function automatically handles promise resolution and rejection.
-		if(!this.pool) {
-			this.pool = new Pool(this.pgConfig);
-			this.init();
-		}
 		return await this.pool.query(query, params);
 	}
 }
