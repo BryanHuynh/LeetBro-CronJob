@@ -59,5 +59,3 @@ findNewAcs().then(
 	}
 );
 console.log('JOB ENDED')
-
-process.exit(0)

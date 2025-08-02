@@ -26,6 +26,16 @@ export class DatabaseService {
 			await this.pool.end();
 			process.exit();
 		});
+		this.testConnection().then(console.log)
+	}
+
+	async testConnection() {
+		try {
+			this.pool.query("SELECT 1");
+			return true;
+		} catch (err) {
+			return false;
+		}
 	}
 
 	async execute(query: string, params?: any[]): Promise<QueryResult<any>> {
